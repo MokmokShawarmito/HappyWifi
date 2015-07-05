@@ -1,0 +1,96 @@
+﻿@model System.Collections.Generic.List<HappyWifi.Website.Models.Image>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-8 col-md-offset-2">
+    <h2>Images</h2>
+    <button class="btn btn-primary add-image-btn">ADD</button>
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td colspan="2"><b>@item.Title  </b></td>
+            </tr>
+            <tr>
+                <td >
+                    <img src="@item.ImageUrl" style="max-height:220px;"/>
+                </td>
+                <td>
+                    <ul>
+                        @if (item.IsHidden)
+                        {
+                            <li><b>Status:</b> Hidden</li>
+                        }
+                        else
+                        {
+                            <li><b>Status:</b> Visible</li>
+                        }
+                        <li><b>Location:</b> @item.Location</li>
+                        <li><b>Website:</b> @item.Website</li>
+                        <li><b>Contact:</b> @item.ContactNo</li>
+                        <li><b>Caption:</b> @item.Caption</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    @*<button class="btn btn-info edit-image-btn" data-imageid="@item.Id">Edit</button>*@
+                    @if (item.IsHidden)
+                    {
+                        <button class="btn btn-warning show-image-btn" data-imageid="@item.Id">Show</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-warning hide-image-btn" data-imageid="@item.Id">Hide</button>
+                    }
+                    <button class="btn btn-danger delete-image-btn" data-imageid="@item.Id">Delete</button>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div class="modal fade" id="shared-modal-template" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title "></h4>
+            </div>
+            <div class="modal-body row">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="add-image-template" type="text/template">
+    <form id="add-image-form" method="post" enctype="multipart/form-data" action="/api/v1/file/upload/">
+        <div class="col-md-12">
+            <b>Title: </b> <input id="image-title" type="text" name="title" value="{{title}}" />
+        </div>
+        <div class="col-md-12">
+            <b>Caption: </b> <input id="image-caption" type="text" name="caption" value="{{caption}}" />
+        </div>
+        <div class="col-md-12">
+            <b>File: </b> <input id="image-image" type="file" name="image" value="{{title}}" />
+        </div>
+    </form>
+</script>
+
+<script id="edit-image-template" type="text/template">
+
+</script>
+
+<script id="delete-image-template" type="text/template">
+
+</script>
+
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/happywifi-admin.js"></script>
+}
+
