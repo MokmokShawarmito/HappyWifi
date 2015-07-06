@@ -21,9 +21,34 @@ input,
 select,
 textarea {
     max-width: 280px;
+    margin-top: 5px;
 }
 
+#image-title{
+    margin-left: 36px;
+}
 
+#image-caption{
+    margin-left: 12px;
+    width: 500px;
+    max-height: 50px;
+}
+
+#image-Location{
+    margin-left: 5px;
+}
+
+#image-website{
+    margin-left: 11px;
+}
+
+#image-contact{
+    margin-left: 12px;
+}
+
+#image-image{
+    margin-left: 74px;
+}
 
 
 /*CHARLES START*/

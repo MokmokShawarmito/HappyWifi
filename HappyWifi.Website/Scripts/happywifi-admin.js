@@ -54,6 +54,14 @@ function ImagesController() {
             $('#shared-modal-template').modal('show');
         });
 
+        $('#shared-modal-template').on('click', 'input', function () {
+            $(this).val("");
+        });
+
+        $('#shared-modal-template').on('click', 'textarea', function () {
+            $(this).text("");
+        });
+
         //send http requests
         $('#shared-modal-template').on('click', '.delete-image-confirm', function () {
             var imageid = $(this).attr('data-imageid');

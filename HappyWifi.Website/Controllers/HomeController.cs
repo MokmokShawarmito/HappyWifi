@@ -11,7 +11,7 @@ namespace HappyWifi.Website.Controllers
     {
         public ActionResult Index()
         {
-            var images = new ImageController().GetAll();
+            var images = new ImageController().GetAll().Where(x => x.IsHidden == false).ToList();
             return View(images);
         }
     }
