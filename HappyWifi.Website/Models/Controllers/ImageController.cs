@@ -18,7 +18,7 @@ namespace HappyWifi.Website.Models.Controllers
         {
             //liteDBPath = HostingEnvironment.ApplicationPhysicalPath + liteDBPath;
             //liteDBPath = liteDBPath.Replace(@"\\",@"\");
-            this.sqlConnectionString = ConfigurationManager.AppSettings["sqlconnectionstring"];
+            this.sqlConnectionString = ConfigurationManager.ConnectionStrings["MSConnectionString"].ConnectionString;
         }
 
         public bool Add(Image image)
