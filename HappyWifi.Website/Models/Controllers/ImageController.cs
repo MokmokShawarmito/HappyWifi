@@ -1,6 +1,8 @@
 ﻿using LiteDB;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
@@ -10,11 +12,13 @@ namespace HappyWifi.Website.Models.Controllers
     public class ImageController
     {
         string liteDBPath =  @"image_litedb.db";
+        string sqlConnectionString = "";
 
         public ImageController()
         {
-            liteDBPath = HostingEnvironment.ApplicationPhysicalPath + liteDBPath;
-            liteDBPath = liteDBPath.Replace(@"\\",@"\");
+            //liteDBPath = HostingEnvironment.ApplicationPhysicalPath + liteDBPath;
+            //liteDBPath = liteDBPath.Replace(@"\\",@"\");
+            this.sqlConnectionString = ConfigurationManager.AppSettings["sqlconnectionstring"];
         }
 
         public bool Add(Image image)
@@ -40,8 +44,35 @@ namespace HappyWifi.Website.Models.Controllers
             using (var db = new LiteDatabase(liteDBPath))
             {
                 // Get a collection (or create, if not exits)
-                var col = db.GetCollection<Image>("images");
-                return col.FindAll().ToList<Image>();
+                //var col = db.GetCollection<Image>("images");
+                //return col.FindAll().ToList<Image>();
+                List<Image> images = new List<Image>();
+
+                using (SqlConnection con = new SqlConnection(this.sqlConnectionString))
+                {
+                    con.Open();
+
+                    string sql = @"";
+                    SqlCommand cmd = new SqlCommand(sql, con);
+                    SqlDataReader data = cmd.ExecuteReader();
+
+                    if(data.HasRows)
+                    {
+                        while(data.Read())
+                        {
+                            Image image = new Image();
+                            image.Id = Int32.Parse(data["Id"].ToString());
+                            image.Title = data["Title"].ToString();
+                            image.Caption = data["Caption"].ToString();
+                        }
+                    }
+
+                    data.Dispose();
+                    cmd.Dispose();
+                    con.Close();
+                }
+
+                return images;
             }
         }
 
