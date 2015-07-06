@@ -1,31 +1,89 @@
-﻿@{
+﻿@model System.Collections.Generic.List<HappyWifi.Website.Models.Image>
+@{
     ViewBag.Title = "Home Page";
+    Layout = null;
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HappyWiFi</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @Styles.Render("~/Content/bootstrap")
+</head>
+<body>
+    <div id="wrapper" class="container-fluid">
+        <div id="main" class="col-xs-12 col-sm-12  col-md-12" style="">
+            <!--Ateneo Main Logo with Happy Wifi-->
+        </div>
+        <div id="ads" class="col-xs-12 col-sm-12  col-md-12">
+            <div id="ads_header">
+                <h2>Our Partners</h2>
+            </div>
+            <div id="ads_body">
+                @foreach (var i in Model)
+                {
+                    <div id="item-" +i class="col-xs-1 col-sm-2  col-md-2 item display-modal" data-title="@i.Title" data-image="@i.ImageUrl" data-location="@i.Location" data-contact="@i.ContactNo" data-caption="@i.Caption" data-website="@i.Website">
+                        <img id="pic-" +i class="pic" src="@i.ImageUrl" alt="acom">
+                        <h4 id="title-" +i class="title">@i.Title</h4>
+                    </div>
+                }
+            </div>
+        </div>
+        <!--<div id="darkbox"></div>-->
+        <div id="ads-bg">
+            <button type="button" class="close" aria-hidden="<true></true>">&times</button>
+            <img id="pic-bg" src="logo/woodcraft.jpg" alt="acom">
+            <h4 id="title-bg" class="title">Title 10</h4>
+            <p id="description"></p>
+        </div>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header alert alert-grey">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">Company Name</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="thumbnail">
+                            <img id="company-logo" src="logo/woodcraft.jpg">
+                        </div>
+                        <p><strong>Location: </strong><span id="company-location">Davao</span></p>
+                        <p><strong>Contact No.: </strong><span id="company-contact">+639198907855</span></p>
+                        <p><strong>Description: </strong><br><span id="company-caption">A company that provides pleasure.</span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="company-website" type="button" class="btn btn-success" onclick="#">Visit Page</button>
+                        <button type="button" class="btn btn-muted" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        $(document).ready(function () {
+            $('.display-modal').click(function () {
+
+                $('#myModalLabel').text($(this).attr('data-title'));
+                $('#company-location').text($(this).attr('data-location'));
+                $('#company-contact').text($(this).attr('data-contact'));
+                $('#company-caption').text($(this).attr('data-caption'));
+                
+                $('#myModal').modal('show');
+
+                var logo = document.getElementById('company-logo');
+
+                logo.setAttribute('src',$(this).attr('data-image'));
+
+                $('#company-website').click(function() {
+                    location.href = $(this).attr('data-website');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

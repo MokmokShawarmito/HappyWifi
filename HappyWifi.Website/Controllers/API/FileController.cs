@@ -43,6 +43,18 @@ namespace HappyWifi.Website.Controllers.API
                 string title = HttpContext.Current.Request["Title"] as string;
                 string caption = HttpContext.Current.Request["Caption"] as string;
                 HttpPostedFile file = HttpContext.Current.Request.Files["image"];
+                string location = string.Empty;
+                string website = string.Empty;
+                string contact = string.Empty;
+
+                if (HttpContext.Current.Request["location"] != null)
+                    location = HttpContext.Current.Request["location"] as string;
+
+                if (HttpContext.Current.Request["website"] != null)
+                    website = HttpContext.Current.Request["website"] as string;
+
+                if (HttpContext.Current.Request["contact"] != null)
+                    contact = HttpContext.Current.Request["contact"] as string;
 
                 //validate file
                 if(ValidateFile(file))
@@ -72,6 +84,9 @@ namespace HappyWifi.Website.Controllers.API
                     image.Title = title;
                     image.ImageUrl = filePath;
                     image.IsHidden = false;
+                    image.Location = location;
+                    image.ContactNo = contact;
+                    image.Website = website;
                     this.imageController.Add(image);
                 }
                 else

@@ -1,0 +1,176 @@
+﻿body {
+	background:url(/Images/Happy_Wifi_mini.png);
+	background-size: 20px 20px;
+	background-repeat: repeat;
+	flood-opacity: .5;
+}
+
+#main {
+	background:url(/Images/Happy_Wifi.png);
+	background-color: white;
+	background-size: 30% 100%;
+	background-position: 50% 0;
+	background-repeat: no-repeat;
+	height: 150px;
+	margin-top: 20px;
+	border-radius: 6px;
+}
+
+#ads {
+	margin-top: 10px;
+	border-radius: 4px;
+}
+
+#ads_header {
+	height: 50px;
+	background:url(/Images/dark_bg.png);
+	border-radius: 4px;
+}
+
+#ads_body {
+	background:url(/Images/lightdark_bg.png);
+}
+
+.item{
+	margin: 10px 0 0 0;
+	background-color: dimgray;
+	border-radius: 4px;
+}
+
+.pic {
+	width:100px;
+	border: 1px solid black;
+	margin: 10px 0 0 0;
+	border-radius: 2px;
+}
+
+.title {
+	
+}
+
+.description {
+	
+}
+
+#ads-bg {
+	
+}
+
+#darkbox {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 8000;
+	display: block;
+	opacity: .5;
+}
+
+#ads-bg {
+	position: absolute;
+	margin: 10% 10%;
+	width: 80%;
+	height: 80%;
+	background-color:  black;
+	z-index: 9999;
+	display: none;
+}
+
+#close {
+	float: right;
+	margin: 10px;
+}
+
+#pic-bg {
+	margin: 30px 20px;
+	width: 70%;
+}
+
+.modal-header {
+	background: rgb(42, 42, 42);
+}
+
+#myModalLabel {
+	color: white;
+	font-weight: 600;
+}
+
+@media (max-width: 320px){
+	
+}
+
+@media (min-width: 320px) and (max-width: 492px){
+	#main {
+		background-size: 60% 100%;
+	background-position: 50% 0;
+	}
+	
+	#ads{
+		padding: 0px;	
+	}
+	
+	#ads_body {
+		height: 1190px;
+	}
+	
+	.item{
+		width: 45%;
+		margin-top:10px;
+		margin-left: 10px;
+		background-color: grey;
+	}
+	
+	.pic {
+		width: 100%;
+	}
+	
+	#ads-bg {
+		background-color: black;
+	}
+}
+
+@media (min-width: 493px) and (max-width: 720px) {
+	#main {
+		background-size: 40% 100%;
+		background-position: 50% 0;
+	}
+	
+	#ads {
+		min-width: 600px;
+	}
+	
+	#ads_body {
+		height: 940px;
+	}
+	
+	.item{
+		width: 31%;
+		margin-top:10px;
+		margin-left: 10px;
+	}
+	
+	.pic {
+		width: 100%;
+	}
+}
+
+@media (min-width: 721px) {
+	#ads_body {
+		min-height: 420px;
+	}
+	
+	.item {
+		width: 18%;
+		margin-left: 10px;
+	}
+	
+	#item6, #item10 {
+		margin-left: 0px;
+	}
+	
+	.pic {
+		width: 100%;
+	}
+}
